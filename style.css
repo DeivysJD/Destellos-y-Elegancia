@@ -1,0 +1,391 @@
+/* ==========================================
+   1. VARIABLES Y CONFIGURACIÓN GENERAL
+   ========================================== */
+:root {
+    --bg-dark: #0b0c10;
+    --bg-surface: #12141c;
+    --gold: #d4af37;
+    --gold-light: #f3e5ab;
+    --text-light: #f5f5f5;
+    --text-muted: #a0a5b5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+h1, h2, h3, .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* ==========================================
+   2. ANIMACIONES PRINCIPALES (KEYFRAMES)
+   ========================================== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes goldShine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseWhatsApp {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* ==========================================
+   3. COMPONENTES Y SECCIONES
+   ========================================== */
+
+/* Navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(11,12,16,0.9), rgba(11,12,16,0));
+    backdrop-filter: blur(5px);
+    animation: fadeInDown 1.2s ease-out;
+}
+
+.logo {
+    font-size: 1.8rem;
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.navbar nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.navbar nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--gold);
+    transition: width 0.3s ease;
+}
+
+.navbar nav a:hover::after {
+    width: 100%;
+}
+
+.navbar nav a:hover {
+    color: var(--gold);
+}
+
+/* Sección Hero (Inicio) */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    /* Imagen elegante conceptual de joyería */
+    background: url('https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(11,12,16,0.4) 0%, rgba(11,12,16,0.85) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+/* Efecto de Texto Dorado Animado */
+.gold-text {
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShine 4s linear infinite;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* Botón Elegante */
+.btn-primary {
+    display: inline-block;
+    padding: 15px 35px;
+    border: 1px solid var(--gold);
+    color: var(--bg-dark);
+    background-color: var(--gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Sección de Colecciones (Galería Interactiva) */
+.collections {
+    padding: 100px 8%;
+    background-color: var(--bg-dark);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--text-light);
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '💎';
+    display: block;
+    font-size: 1rem;
+    margin-top: 10px;
+    color: var(--gold);
+}
+
+.grid-collections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+/* Tarjeta con efecto de revelado y desenfoque */
+.card {
+    background-color: var(--bg-surface);
+    overflow: hidden;
+    position: relative;
+    height: 400px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: border 0.4s ease;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease;
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(11,12,16,1) 0%, rgba(11,12,16,0) 100%);
+    transition: transform 0.4s ease;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    opacity: 0.8;
+    transform: translateY(10px);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Efectos HOVER en las Tarjetas */
+.card:hover {
+    border-color: var(--gold);
+}
+
+.card:hover .card-img {
+    transform: scale(1.08);
+    filter: brightness(0.7) contrast(1.1);
+}
+
+.card:hover .card-info p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sección Nuestra Esencia */
+.about {
+    padding: 120px 8%;
+    background-color: var(--bg-surface);
+    text-align: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.05);
+}
+
+.about-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 25px;
+}
+
+.about p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 40px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature-item {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 5px;
+}
+
+/* Botón Flotante de WhatsApp con Efecto de Ondas */
+.whatsapp-float {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    transition: transform 0.3s ease;
+    animation: pulseWhatsApp 2s infinite;
+}
+
+.whatsapp-icon {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.15) rotate(10deg);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--bg-dark);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   4. RESPONSIVE DESIGN (ADAPTACIÓN MÓVIL)
+   ========================================== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 20px 4%;
+    }
+    .logo {
+        font-size: 1.1rem; /* Ajustado para que el nombre largo no se amontone en celulares */
+    }
+    .navbar nav a {
+        margin-left: 12px;
+        font-size: 0.75rem;
+    }
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    .whatsapp-icon {
+        width: 26px;
+        height: 26px;
+    }
+}
